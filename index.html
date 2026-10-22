@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thẻ Tôi Tin Prudential | Production V6</title>
+<style>
+:root{--pru-red:#ed1b2f;--red-dark:#b80f23;--ink:#252b2f;--muted:#667078;--paper:#fff;--soft:#f7f7f5;--gold:#ffca28;--green:#16835a;--shadow:0 18px 50px rgba(37,43,47,.18)}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0%,#fff 0 16%,transparent 42%),linear-gradient(140deg,#faf9f7,#f0f1f1);min-height:100vh}
+button{font:inherit}.app{max-width:1180px;margin:auto;padding:22px 20px 34px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border-radius:50%;background:var(--pru-red);display:grid;place-items:center;color:#fff;font-weight:900;font-size:24px;box-shadow:0 8px 20px rgba(237,27,47,.25)}h1{font-size:clamp(20px,3vw,30px);margin:0}.subtitle{color:var(--muted);font-size:14px;margin-top:3px}.top-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s background}.btn:hover{transform:translateY(-1px)}.btn:focus-visible{outline:3px solid #ffc6cd;outline-offset:2px}.btn.primary{background:var(--pru-red);color:#fff;box-shadow:0 8px 18px rgba(237,27,47,.22)}.btn.secondary{background:#fff;color:var(--ink);border:1px solid #dde0e1}.btn.dark{background:var(--ink);color:#fff}.btn.good{background:#e8f5ef;color:#0c6c48;border:1px solid #b9dfcf}.btn.review{background:#fff5da;color:#775400;border:1px solid #f2d47a}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.progress-wrap{background:#fff;border:1px solid #e0e2e3;border-radius:16px;padding:13px 15px;margin-bottom:22px;box-shadow:0 8px 25px rgba(37,43,47,.06)}.progress-row{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:800;margin-bottom:8px}.bar{height:10px;background:#eceeed;border-radius:999px;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--pru-red),#ff5c6b);transition:width .35s ease;border-radius:inherit}
+main{flex:1;display:grid;grid-template-columns:minmax(280px,1fr) minmax(270px,.75fr);align-items:center;gap:44px}.stage{min-height:540px;display:flex;align-items:center;justify-content:center;position:relative}.table-note{position:absolute;left:0;top:6px;color:var(--muted);font-size:13px}.deck-zone{display:flex;align-items:center;gap:32px;flex-wrap:wrap;justify-content:center}.deck-stack{width:210px;height:322px;position:relative;cursor:pointer}.deck-layer,.deck-cover{position:absolute;inset:0;border-radius:23px}.deck-layer{background:#fff;border:8px solid var(--pru-red);box-shadow:var(--shadow)}.deck-layer:nth-child(1){transform:translate(13px,10px) rotate(4deg)}.deck-layer:nth-child(2){transform:translate(7px,5px) rotate(2deg)}.deck-cover{background:var(--pru-red);border:8px solid #fff;outline:3px solid var(--pru-red);display:grid;place-items:center;color:#fff;overflow:hidden}.deck-cover:before,.deck-cover:after{content:"";position:absolute;width:260px;height:86px;background:#fff;border-radius:50%;transform:rotate(-36deg)}.deck-cover:before{top:48px;left:-78px}.deck-cover:after{bottom:46px;right:-78px}.uno{z-index:1;background:var(--pru-red);border:4px solid #fff;border-radius:50%;padding:17px 12px;transform:rotate(-12deg);font-size:34px;font-style:italic;font-weight:900;letter-spacing:-2px;text-shadow:2px 2px 0 #8b0a19}.deck-count{position:absolute;bottom:16px;z-index:2;background:#fff;color:var(--pru-red);border-radius:999px;padding:6px 10px;font-weight:900;font-size:13px}.deck-stack:hover{transform:translateY(-3px)}
+.card-shell{width:min(360px,84vw);height:520px;perspective:1300px;display:none}.card-shell.active{display:block}.card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .62s cubic-bezier(.2,.72,.2,1)}.card-shell.flipped .card-inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:38px 30px;border:8px solid #fff;outline:3px solid var(--pru-red)}.front{background:var(--pru-red);color:#fff}.front:before{content:"";position:absolute;width:560px;height:190px;background:#fff;border-radius:50%;transform:rotate(-38deg);opacity:.13}.back{background:#fff;color:var(--ink);transform:rotateY(180deg)}.face-label{position:absolute;top:28px;font-size:15px;letter-spacing:2px;font-weight:900}.front .face-label{color:#fff}.back .face-label{color:var(--pru-red)}.front-value{font-size:clamp(44px,8vw,68px);line-height:1.02;font-weight:900;z-index:1}.back-value{font-size:clamp(25px,4vw,35px);line-height:1.35;font-weight:850}.mini{position:absolute;bottom:26px;font-size:12px;font-weight:700;opacity:.82}
+.control-panel{background:#fff;border:1px solid #e0e2e3;border-radius:24px;padding:28px;box-shadow:0 14px 38px rgba(37,43,47,.09)}.control-panel h2{font-size:23px;margin:0 0 10px}.instruction{color:var(--muted);line-height:1.55;margin:0 0 22px}.action-stack{display:grid;gap:11px}.action-stack .btn{width:100%;min-height:48px}.rate-row{display:none;grid-template-columns:1fr 1fr;gap:10px}.rate-row.show{display:grid}.status{margin-top:18px;padding:12px 13px;border-radius:12px;background:var(--soft);font-size:13px;line-height:1.45;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(20,24,26,.64);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.modal-card{width:min(680px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:24px;padding:27px;box-shadow:0 30px 80px rgba(0,0,0,.35)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.modal-head h2{margin:0}.x{width:38px;height:38px;border-radius:50%;border:0;background:#f1f2f2;font-size:23px;cursor:pointer}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.stat{background:var(--soft);border-radius:15px;padding:16px;text-align:center}.stat b{font-size:26px;display:block;color:var(--pru-red)}.results{display:grid;gap:8px}.result-row{display:grid;grid-template-columns:66px 1fr auto;align-items:center;gap:10px;border:1px solid #e3e5e5;border-radius:12px;padding:10px 12px;font-size:13px}.pill{border-radius:999px;padding:5px 9px;font-weight:800;white-space:nowrap}.pill.good{background:#e8f5ef;color:#0c6c48}.pill.review{background:#fff5da;color:#775400}.pill.opened{background:#edf2f7;color:#41546a}.pill.new{background:#f0f0f0;color:#6c7378}
+.toast{position:fixed;left:50%;bottom:24px;max-width:min(92vw,560px);text-align:center;line-height:1.4;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:11px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:30;font-weight:700;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){main{grid-template-columns:1fr;gap:14px}.stage{min-height:470px}.control-panel{padding:20px}.deck-zone{gap:16px}.deck-stack{width:190px;height:292px}.card-shell{height:450px}header{align-items:flex-start}.subtitle{display:none}.stats{grid-template-columns:1fr}.result-row{grid-template-columns:56px 1fr}.result-row .pill{grid-column:2;justify-self:start}}
+</style>
+
+<style id="qc-upgrade">
+:root{--glass:rgba(255,255,255,.80)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 12%,rgba(237,27,47,.11),transparent 27%),radial-gradient(circle at 18% 86%,rgba(255,202,40,.10),transparent 24%);z-index:-1}
+.control-panel{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.deck-stack{transition:transform .22s ease,filter .22s ease}.deck-stack.deck-shake{animation:deckShake .48s ease}.deck-stack:hover{filter:drop-shadow(0 14px 25px rgba(237,27,47,.18))}
+.card-shell.card-enter{animation:cardDraw .62s cubic-bezier(.16,.85,.25,1)}
+.card-shell.flip-glow .face{animation:flipGlow .82s ease}
+.btn.triggered{animation:buttonPop .30s ease}.btn.good.success-pulse{animation:successPulse .58s ease}.btn.review.review-shake{animation:reviewShake .42s ease}
+.progress-row{align-items:center}.progress-meta{display:flex;align-items:center;gap:9px}.rank-badge{display:inline-flex;align-items:center;gap:6px;background:#fff0f2;color:var(--pru-red);border:1px solid #ffcbd1;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;letter-spacing:.35px;transition:.25s}.rank-badge.rank-pop{animation:badgePop .45s ease}.stars{color:#d9dcde;letter-spacing:2px;font-size:15px}.stars .on{color:#ffca28;text-shadow:0 1px 0 #b38400}
+.bar>div{position:relative}.bar>div:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);transform:translateX(-100%);animation:barShine 1.5s infinite}
+.donut-wrap{display:flex;gap:18px;align-items:center;background:linear-gradient(145deg,#fff,#f6f7f7);border:1px solid #e2e4e4;border-radius:17px;padding:15px;margin-bottom:16px}.donut{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0deg,#f0c34e 0deg,#eceeef 0deg);position:relative;flex:0 0 auto;transition:background .5s ease}.donut:after{content:"";position:absolute;inset:14px;border-radius:50%;background:#fff}.donut strong{position:relative;z-index:1;font-size:20px}.donut-copy b{display:block;font-size:17px;margin-bottom:5px}.donut-copy span{color:var(--muted);font-size:13px;line-height:1.4}
+#reviewOnlyBtn{display:none}.sound-on{color:var(--pru-red)!important;border-color:#ffcbd1!important;background:#fff3f5!important}
+.confetti-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:40}.confetti-piece{position:absolute;top:-24px;width:10px;height:18px;border-radius:2px;animation:confettiFall var(--dur) linear forwards;transform:rotate(var(--rot))}.master-banner{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.72);width:min(520px,88vw);background:#fff;border:3px solid var(--pru-red);border-radius:25px;padding:29px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.32);z-index:42;opacity:0;pointer-events:none}.master-banner.show{animation:masterIn 2.15s ease both}.master-icon{font-size:51px}.master-banner h2{margin:8px 0 5px;color:var(--pru-red)}.master-banner p{margin:0;color:var(--muted)}
+.mode-chip{display:inline-flex;margin-top:10px;border-radius:999px;background:#fff5da;color:#775400;padding:5px 9px;font-size:11px;font-weight:900}
+@keyframes deckShake{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-8px) rotate(-2deg)}40%{transform:translateX(8px) rotate(2deg)}60%{transform:translateX(-5px) rotate(-1deg)}80%{transform:translateX(4px) rotate(1deg)}}
+@keyframes cardDraw{0%{opacity:0;transform:translateX(-150px) rotate(-13deg) scale(.78)}70%{opacity:1;transform:translateX(10px) rotate(2deg) scale(1.025)}100%{transform:none}}
+@keyframes flipGlow{0%,100%{filter:none}50%{filter:drop-shadow(0 0 22px rgba(237,27,47,.48))}}
+@keyframes buttonPop{0%{transform:scale(1)}50%{transform:scale(.94)}100%{transform:scale(1)}}
+@keyframes successPulse{0%,100%{box-shadow:none}50%{transform:scale(1.035);box-shadow:0 0 0 9px rgba(22,131,90,.12)}}
+@keyframes reviewShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@keyframes badgePop{50%{transform:scale(1.14)}}
+@keyframes barShine{100%{transform:translateX(100%)}}
+@keyframes confettiFall{0%{transform:translate3d(0,-5vh,0) rotate(0);opacity:1}100%{transform:translate3d(var(--drift),110vh,0) rotate(760deg);opacity:.85}}
+@keyframes masterIn{0%{opacity:0;transform:translate(-50%,-50%) scale(.72)}14%,75%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-54%) scale(.96)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.progress-row{align-items:flex-start}.progress-meta{flex-direction:column;align-items:flex-end;gap:4px}.stars{font-size:13px}.donut-wrap{align-items:flex-start}}
+</style>
+
+<style id="responsive-layout-v3">
+/* V3 layout rebuilt to prevent the status label from overlapping or clipping the card */
+html,body{min-height:100%;overflow-x:hidden}
+.app{min-height:100dvh;padding:clamp(12px,2vw,22px) clamp(12px,2vw,20px) 24px}
+header{flex:0 0 auto;margin-bottom:clamp(10px,1.8vh,18px)}
+.progress-wrap{flex:0 0 auto;margin-bottom:clamp(12px,2vh,20px)}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(340px,1.15fr) minmax(285px,.72fr);align-items:stretch;gap:clamp(18px,3vw,42px)}
+.stage{min-height:0;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr);align-items:center;justify-items:center;gap:12px;padding:2px 10px 12px;overflow:visible}
+.table-note{position:static;inset:auto;width:100%;min-height:22px;margin:0;text-align:center;line-height:1.4;color:var(--muted);font-size:13px;z-index:2}
+.deck-zone{grid-row:2;width:100%;height:100%;min-height:360px;display:flex;align-items:center;justify-content:center}
+.card-shell{grid-row:2;justify-self:center;align-self:center;width:auto;height:min(520px,calc(100dvh - 270px));min-height:360px;aspect-ratio:360/520;max-width:min(92%,360px);perspective:1300px}
+.card-inner,.face{width:100%;height:100%}
+.face{padding:clamp(26px,5vh,38px) clamp(20px,4vw,30px)}
+.face-label{top:clamp(20px,4vh,28px)}
+.front-value{font-size:clamp(42px,7vw,68px)}
+.back-value{font-size:clamp(22px,3.2vw,35px)}
+.control-panel{align-self:center;max-height:calc(100dvh - 220px);overflow:auto;overscroll-behavior:contain}
+.top-actions .btn{white-space:nowrap}
+@media (min-width:821px) and (max-height:760px){
+ .app{padding-top:12px}.brand .mark{width:38px;height:38px}.brand h1{font-size:22px}
+ header{margin-bottom:9px}.progress-wrap{padding:10px 13px;margin-bottom:10px}
+ .card-shell{height:min(445px,calc(100dvh - 235px));min-height:330px}
+ .deck-zone{min-height:330px}.control-panel{padding:20px;max-height:calc(100dvh - 190px)}
+ .control-panel h2{font-size:20px}.instruction{margin-bottom:14px}.status{margin-top:12px}
+}
+@media (max-width:820px){
+ body{background:linear-gradient(155deg,#fff,#f2f3f3)}
+ .app{display:block;min-height:100dvh;padding:12px 12px 22px}
+ header{display:grid;grid-template-columns:1fr;gap:10px}.brand{align-items:flex-start}.top-actions{justify-content:flex-start;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.top-actions .btn{padding:10px 7px;font-size:12px}
+ .progress-wrap{margin-bottom:12px}.progress-row{align-items:center}.progress-meta{flex-direction:row;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+ main{display:flex;flex-direction:column;gap:12px;min-height:0}
+ .stage{order:1;display:grid;grid-template-rows:auto auto;gap:8px;padding:0;min-height:0;height:auto}
+ .table-note{font-size:12px;min-height:18px;text-align:left;padding-inline:3px}
+ .deck-zone{grid-row:2;min-height:330px;height:auto;padding:8px 0}
+ .deck-stack{width:min(180px,48vw);height:auto;aspect-ratio:210/322}
+ .card-shell{grid-row:2;width:min(86vw,340px);height:auto;min-height:0;aspect-ratio:360/520;max-width:none;align-self:center}
+ .control-panel{order:2;align-self:stretch;max-height:none;overflow:visible;padding:18px;border-radius:20px}
+ .control-panel h2{font-size:20px}.instruction{margin-bottom:14px}.status{margin-top:12px}
+ .face{border-width:6px;outline-width:2px}.front-value{font-size:clamp(42px,15vw,62px)}.back-value{font-size:clamp(22px,7vw,31px)}
+}
+@media (max-width:430px){
+ .brand .mark{width:38px;height:38px;font-size:20px}.brand h1{font-size:19px}.subtitle{display:block;font-size:11px}
+ .top-actions{grid-template-columns:1fr 1fr}.top-actions #summaryBtn{grid-column:1/-1}
+ .progress-meta .stars{display:none}.rank-badge{font-size:10px;padding:4px 7px}
+ .card-shell{width:min(88vw,320px)}.deck-zone{min-height:300px}
+ .rate-row{grid-template-columns:1fr}.modal-card{padding:18px}.result-row{grid-template-columns:52px 1fr}.result-row .pill{grid-column:2}
+}
+@media (max-height:650px) and (orientation:landscape){
+ .subtitle{display:none}.app{padding:8px 12px 12px}header{margin-bottom:6px}.progress-wrap{margin-bottom:7px;padding:8px 11px}
+ main{grid-template-columns:minmax(300px,1fr) minmax(260px,.72fr);gap:16px}.stage{gap:4px}.table-note{font-size:11px}
+ .card-shell{height:calc(100dvh - 180px);min-height:285px}.deck-zone{min-height:285px}.control-panel{padding:15px;max-height:calc(100dvh - 145px)}
+ .control-panel h2{font-size:18px}.instruction{font-size:13px;margin-bottom:10px}.action-stack .btn{min-height:40px;padding:8px 12px}.status{display:none}
+}
+</style>
+<style id="v5-card-upgrade">
+/* V5: in-flow layout (no overlap), icons, auto-fit text, flip + fly animations */
+.face{display:grid!important;grid-template-rows:auto minmax(0,1fr) auto;justify-items:center;align-items:stretch;gap:10px}
+.face-label,.mini{position:static!important;z-index:1}
+.face-body{min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2.4vh,18px);z-index:1}
+.value-box{flex:1 1 auto;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.front-value,.back-value{max-width:100%;overflow-wrap:break-word;hyphens:auto}
+.back-value{font-weight:800}
+.card-icon{flex:0 0 auto;width:clamp(58px,10vh,84px);height:clamp(58px,10vh,84px);border-radius:50%;display:grid;place-items:center}
+.card-icon svg{width:56%;height:56%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.front .card-icon{background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.55);color:#fff;animation:iconFloat 3s ease-in-out infinite}
+.back .card-icon{background:#fff0f2;border:2px solid #ffcbd1;color:var(--pru-red)}
+.card-shell.flipped .back .card-icon{animation:iconPop .55s .35s both}
+/* Flip: lift + rotate */
+.card-inner{transition:none!important}
+.card-shell.flipped .card-inner{transform:rotateY(180deg)}
+.card-shell.flipping .card-inner{animation:flip3d .75s cubic-bezier(.3,.7,.25,1) both}
+/* Fly in / fly out */
+.card-shell.card-enter{animation:flyIn .6s cubic-bezier(.16,.85,.25,1) both!important}
+.card-shell.card-exit{animation:flyOut .45s cubic-bezier(.55,0,.8,.4) both;pointer-events:none}
+@keyframes flip3d{0%{transform:rotateY(0) scale(1)}45%{transform:rotateY(95deg) scale(1.07) translateY(-10px)}100%{transform:rotateY(180deg) scale(1)}}
+@keyframes flyIn{0%{opacity:0;transform:translate(-120%,40px) rotate(-22deg) scale(.7)}65%{opacity:1;transform:translate(6%,-6px) rotate(3deg) scale(1.03)}100%{opacity:1;transform:none}}
+@keyframes flyOut{0%{opacity:1;transform:none}25%{transform:translate(-4%,-8px) rotate(-3deg)}100%{opacity:0;transform:translate(130%,-60px) rotate(24deg) scale(.75)}}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes iconPop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@media(max-width:820px){.card-icon{width:clamp(50px,14vw,72px);height:clamp(50px,14vw,72px)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="mark">P</div><div><h1>TÔI TIN PRUDENTIAL</h1><div class="subtitle">Công cụ thẻ tương tác • Chọn, lật và ghi nhớ</div></div></div>
+  <div class="top-actions"><button class="btn secondary" id="soundBtn" aria-pressed="false">♪ Âm thanh: Tắt</button><button class="btn secondary" id="shuffleBtn">⤨ Xáo thẻ</button><button class="btn dark" id="summaryBtn">≡ Tổng kết</button></div>
+</header>
+<div class="progress-wrap"><div class="progress-row"><span>Tiến trình hoàn thành</span><div class="progress-meta"><span class="stars" id="stars">☆☆☆☆</span><span class="rank-badge" id="rankBadge">ROOKIE</span><span id="progressText">0/8 thẻ</span></div></div><div class="bar"><div id="progressBar"></div></div></div>
+<main>
+<section class="stage">
+  <div class="table-note" id="stageNote">Nhấn vào bộ bài để chọn thẻ đầu tiên.</div>
+  <div class="deck-zone" id="deckZone">
+    <div class="deck-stack" id="deck" role="button" tabindex="0" aria-label="Chọn thẻ">
+      <div class="deck-layer"></div><div class="deck-layer"></div><div class="deck-cover"><span class="uno">PRU</span><span class="deck-count" id="deckCount">8 THẺ</span></div>
+    </div>
+  </div>
+  <div class="card-shell" id="cardShell"><div class="card-inner">
+    <article class="face front"><div class="face-label" id="frontLabel">THẺ</div><div class="face-body"><div class="card-icon" id="frontIcon"></div><div class="value-box"><div class="front-value" id="frontValue"></div></div></div><div class="mini">MẶT TRƯỚC</div></article>
+    <article class="face back"><div class="face-label" id="backLabel">THẺ</div><div class="face-body"><div class="card-icon" id="backIcon"></div><div class="value-box"><div class="back-value" id="backValue"></div></div></div><div class="mini">MẶT SAU • KẾT QUẢ ĐỐI CHIẾU</div></article>
+  </div></div>
+</section>
+<aside class="control-panel">
+  <h2 id="panelTitle">Sẵn sàng bắt đầu?</h2>
+  <p class="instruction" id="instruction">Chọn một thẻ từ bộ bài. Hãy giải thích ý nghĩa của con số trước khi hiện mặt sau để đối chiếu.</p>
+  <div class="action-stack">
+    <button class="btn primary" id="drawBtn">Chọn thẻ</button>
+    <button class="btn primary" id="revealBtn" style="display:none">Hiện mặt sau</button>
+    <div class="rate-row" id="rateRow"><button class="btn good" id="knowBtn">✅ Chính xác</button><button class="btn review" id="reviewBtn">🤔 Chưa chính xác</button></div>
+    <button class="btn primary" id="nextBtn" style="display:none">🎴 Thẻ tiếp theo</button>
+  </div>
+  <div class="status" id="statusBox">Mẹo: Có thể bấm <b>Tổng kết</b> bất cứ lúc nào để xem tiến độ và kết quả tự đánh giá.</div>
+</aside>
+</main>
+</div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><div class="modal-head"><h2>Tổng kết hoạt động</h2><button class="x" id="closeModal" aria-label="Đóng">×</button></div><div class="stats"><div class="stat"><b id="sViewed">0</b>Đã mở</div><div class="stat"><b id="sKnow">0</b>Chính xác</div><div class="stat"><b id="sReview">0</b>Chưa chính xác</div><div class="stat"><b id="sAccuracy">0%</b>Độ chính xác</div></div><div class="donut-wrap"><div class="donut" id="donut"><strong id="donutPct">0%</strong></div><div class="donut-copy"><b id="donutTitle">KPI Độ chính xác</b><span id="donutText">Hãy mở thẻ và đối chiếu để xem kết quả.</span></div></div><div class="results" id="results"></div><div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap"><button class="btn review" id="reviewOnlyBtn">🤔 Ôn lại các thẻ chưa chính xác</button><button class="btn secondary" id="continueBtn">Tiếp tục</button><button class="btn primary" id="restartBtn">Làm lại từ đầu</button></div></div></div>
+<div class="confetti-layer" id="confettiLayer"></div><div class="master-banner" id="masterBanner"><div class="master-icon">★</div><h2>PRUDENTIAL MASTER</h2><p>Bạn đã hoàn thành toàn bộ bộ thẻ Tôi Tin Prudential.</p></div><div class="toast" id="toast"></div>
+<script>
+const cards=[
+{id:1,front:'16.489 tỷ',back:'Quyền lợi bảo hiểm & bồi thường chi trả năm 2025, hơn 25% toàn thị trường'},
+{id:2,front:'2.430 tỷ',back:'Lợi nhuận trước thuế 6 tháng đầu năm 2026'},
+{id:3,front:'> 200%',back:'Biên khả năng thanh toán, nền tảng tài chính an toàn'},
+{id:4,front:'2,3 triệu',back:'Số người được Prudential bảo hiểm, tính đến 6/2026'},
+{id:5,front:'Top 1',back:'Top 1 MDRT tại Việt Nam 3 năm liên tiếp (2025)'},
+{id:6,front:'30 phút',back:'1.636 hồ sơ có kết quả trong vòng 30 phút nhờ OCR kết hợp AI (công bố 01/2025)'},
+{id:7,front:'10 năm liên tiếp',back:'Top 10 công ty bảo hiểm nhân thọ uy tín – Vietnam Report (2026)'},
+{id:8,front:'196.755 tỷ',back:'Tổng tài sản tính đến 6/2026'}];
+let order=[],pos=0,current=null,state={}; cards.forEach(c=>state[c.id]={viewed:false,rating:null});
+const $=id=>document.getElementById(id); const shell=$('cardShell');
+function shuffleArray(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function newOrder(){order=shuffleArray(cards.map(c=>c.id));pos=0}
+function remaining(){return cards.length-Object.values(state).filter(x=>x.viewed).length}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1500)}
+function updateProgress(){const n=Object.values(state).filter(x=>x.viewed).length;$('progressText').textContent=`${n}/${cards.length} thẻ`;$('progressBar').style.width=`${n/cards.length*100}%`;$('deckCount').textContent=`${Math.max(remaining(),0)} THẺ`}
+function pick(){
+ if(remaining()===0){showSummary();return}
+ let id=order.find((id,i)=>i>=pos&&!state[id].viewed); if(!id){newOrder();id=order.find(id=>!state[id].viewed)} pos=order.indexOf(id)+1; current=cards.find(c=>c.id===id);
+ shell.classList.remove('flipped');$('deckZone').style.display='none';shell.classList.add('active');
+ $('frontLabel').textContent=`THẺ ${current.id}`;$('backLabel').textContent=`THẺ ${current.id}`;$('frontValue').textContent=current.front;$('backValue').textContent=current.back;
+ $('drawBtn').style.display='none';$('revealBtn').style.display='block';$('rateRow').classList.remove('show');$('nextBtn').style.display='none';
+ $('panelTitle').textContent=`Thẻ ${current.id}: Bạn liên tưởng điều gì?`;$('instruction').textContent='Hãy nói hoặc ghi lại ý nghĩa của dữ kiện trên thẻ, sau đó hiện mặt sau để đối chiếu.';$('stageNote').textContent='Mặt trước • Hãy liên tưởng ý nghĩa của dữ kiện.';
+}
+function reveal(){if(!current)return;shell.classList.add('flipped');state[current.id].viewed=true;updateProgress();$('revealBtn').style.display='none';$('rateRow').classList.add('show');$('nextBtn').style.display='block';$('panelTitle').textContent='Đối chiếu kết quả';$('instruction').textContent='Tự đánh giá mức độ ghi nhớ. Bạn vẫn có thể chuyển tiếp mà không cần chọn mức đánh giá.';$('stageNote').textContent='Mặt sau • Kết quả đối chiếu.'}
+function rate(v){if(!current)return;state[current.id].rating=v;toast(v==='know'?'🎉 Tuyệt vời! Bạn đã trả lời chính xác.':'📚 Không sao, hãy thử lại ở vòng ôn tập nhé.');renderStatus()}
+function next(){if(remaining()===0){showSummary();return}pick()}
+function renderStatus(){if(!current)return;const r=state[current.id].rating;$('statusBox').innerHTML=r==='know'?'Trạng thái thẻ này: <b style="color:#0c6c48">Chính xác</b>':r==='review'?'Trạng thái thẻ này: <b style="color:#775400">Chưa chính xác</b>':'Bạn chưa tự đánh giá thẻ này.'}
+function showSummary(){const vals=Object.values(state),viewed=vals.filter(x=>x.viewed).length,know=vals.filter(x=>x.rating==='know').length,review=vals.filter(x=>x.rating==='review').length;$('sViewed').textContent=viewed;$('sKnow').textContent=know;$('sReview').textContent=review;const rated=know+review;$('sAccuracy').textContent=(rated?Math.round(know/rated*100):0)+'%';$('results').innerHTML=cards.map(c=>{const s=state[c.id];let cls='new',txt='Chưa mở';if(s.rating==='know'){cls='good';txt='Chính xác'}else if(s.rating==='review'){cls='review';txt='Chưa chính xác'}else if(s.viewed){cls='opened';txt='Đã mở'}return `<div class="result-row"><b>Thẻ ${c.id}</b><span>${c.front}</span><span class="pill ${cls}">${txt}</span></div>`}).join('');$('modal').classList.add('show');$('modal').setAttribute('aria-hidden','false')}
+function closeSummary(){$('modal').classList.remove('show');$('modal').setAttribute('aria-hidden','true')}
+function reset(){cards.forEach(c=>state[c.id]={viewed:false,rating:null});newOrder();current=null;shell.classList.remove('active','flipped');$('deckZone').style.display='flex';$('drawBtn').style.display='block';$('revealBtn').style.display='none';$('rateRow').classList.remove('show');$('nextBtn').style.display='none';$('panelTitle').textContent='Sẵn sàng bắt đầu?';$('instruction').textContent='Chọn một thẻ từ bộ bài. Hãy giải thích ý nghĩa của con số trước khi hiện mặt sau để đối chiếu.';$('stageNote').textContent='Nhấn vào bộ bài để chọn thẻ đầu tiên.';$('statusBox').innerHTML='Mẹo: Có thể bấm <b>Tổng kết</b> bất cứ lúc nào để xem tiến độ và kết quả tự đánh giá.';updateProgress();closeSummary()}
+$('drawBtn').onclick=pick;$('deck').onclick=pick;$('deck').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}};$('revealBtn').onclick=reveal;$('knowBtn').onclick=()=>rate('know');$('reviewBtn').onclick=()=>rate('review');$('nextBtn').onclick=next;$('summaryBtn').onclick=showSummary;$('closeModal').onclick=closeSummary;$('continueBtn').onclick=closeSummary;$('restartBtn').onclick=reset;$('shuffleBtn').onclick=()=>{newOrder();toast('Đã xáo thứ tự thẻ');};$('modal').onclick=e=>{if(e.target===$('modal'))closeSummary()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSummary()});newOrder();updateProgress();
+</script>
+
+<script id="qc-upgrade-js">
+(()=>{
+ let soundEnabled=false,reviewMode=false,celebrated=false;
+ const originalPick=pick, originalReveal=reveal, originalShowSummary=showSummary, originalReset=reset, originalUpdateProgress=updateProgress;
+ function clickFx(el){el.classList.remove('triggered');void el.offsetWidth;el.classList.add('triggered')}
+ function tone(type='tap'){
+   if(!soundEnabled)return;
+   try{const A=window.AudioContext||window.webkitAudioContext,ctx=new A(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);const map={tap:[330,.06],draw:[230,.13],flip:[440,.11],good:[660,.17],review:[260,.13],done:[880,.32]};let [f,d]=map[type]||map.tap;o.frequency.setValueAtTime(f,ctx.currentTime);if(type==='done')o.frequency.exponentialRampToValueAtTime(1320,ctx.currentTime+d);g.gain.setValueAtTime(.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.07,ctx.currentTime+.015);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);o.start();o.stop(ctx.currentTime+d+.02)}catch(e){}
+ }
+ function badgeData(n){if(n>=8)return ['PRUDENTIAL MASTER',4];if(n>=6)return ['CHALLENGER',3];if(n>=4)return ['EXPLORER',2];if(n>=2)return ['RISING STAR',1];return ['ROOKIE',0]}
+ updateProgress=function(){originalUpdateProgress();const n=Object.values(state).filter(x=>x.viewed).length,[label,starN]=badgeData(n),badge=$('rankBadge');if(badge.textContent!==label){badge.textContent=label;badge.classList.remove('rank-pop');void badge.offsetWidth;badge.classList.add('rank-pop')}$('stars').innerHTML=[0,1,2,3].map(i=>i<starN?'<span class="on">★</span>':'☆').join('');if(reviewMode)$('progressText').textContent=`${n}/${cards.length} • Ôn thẻ chưa chính xác`;}
+ function doPick(){originalPick();shell.classList.remove('card-enter');void shell.offsetWidth;shell.classList.add('card-enter');tone('draw')}
+ function animatedPick(){clickFx($('drawBtn'));if($('deckZone').style.display!=='none'){$('deck').classList.add('deck-shake');setTimeout(()=>{$('deck').classList.remove('deck-shake');doPick()},250)}else doPick()}
+ reveal=function(){clickFx($('revealBtn'));originalReveal();shell.classList.add('flip-glow');setTimeout(()=>shell.classList.remove('flip-glow'),850);tone('flip');}
+ function celebrate(){if(celebrated)return;celebrated=true;tone('done');const layer=$('confettiLayer'),colors=['#ed1b2f','#ffffff','#ffca28','#b80f23'];for(let i=0;i<92;i++){const x=document.createElement('i');x.className='confetti-piece';x.style.left=Math.random()*100+'vw';x.style.background=colors[i%colors.length];x.style.setProperty('--dur',(1.8+Math.random()*1.7)+'s');x.style.setProperty('--drift',(-90+Math.random()*180)+'px');x.style.setProperty('--rot',(Math.random()*180)+'deg');x.style.animationDelay=(Math.random()*.35)+'s';layer.appendChild(x)}$('masterBanner').classList.add('show');setTimeout(()=>{layer.innerHTML='';$('masterBanner').classList.remove('show')},2700)}
+ function rateEnhanced(v,btn){clickFx(btn);rate(v);btn.classList.remove(v==='know'?'success-pulse':'review-shake');void btn.offsetWidth;btn.classList.add(v==='know'?'success-pulse':'review-shake');tone(v==='know'?'good':'review')}
+ showSummary=function(){originalShowSummary();const vals=Object.values(state),know=vals.filter(x=>x.rating==='know').length,review=vals.filter(x=>x.rating==='review').length,viewed=vals.filter(x=>x.viewed).length,rated=know+review,pct=rated?Math.round(know/rated*100):0,knowDeg=know/cards.length*360,reviewDeg=(know+review)/cards.length*360;$('donut').style.background=`conic-gradient(var(--green) 0 ${knowDeg}deg,#f0c34e ${knowDeg}deg ${reviewDeg}deg,#eceeef ${reviewDeg}deg 360deg)`;$('donutPct').textContent=pct+'%';$('sAccuracy').textContent=pct+'%';$('donutTitle').textContent='KPI Độ chính xác';$('donutText').textContent=`${know} thẻ chính xác • ${review} thẻ chưa chính xác • ${cards.length-viewed} thẻ chưa mở`;$('reviewOnlyBtn').style.display=review>0?'inline-block':'none';if(viewed===cards.length&&!reviewMode)celebrate()}
+ function reviewOnly(){const ids=cards.filter(c=>state[c.id].rating==='review').map(c=>c.id);if(!ids.length)return;reviewMode=true;celebrated=false;cards.forEach(c=>{if(ids.includes(c.id)){state[c.id].viewed=false;state[c.id].rating=null}else state[c.id].viewed=true});order=shuffleArray(ids.slice());pos=0;current=null;closeSummary();shell.classList.remove('active','flipped');$('deckZone').style.display='flex';$('drawBtn').style.display='block';$('revealBtn').style.display='none';$('rateRow').classList.remove('show');$('nextBtn').style.display='none';$('panelTitle').textContent='Ôn lại các thẻ chưa chính xác';$('instruction').innerHTML=`Có <b>${ids.length}</b> thẻ cần ôn lại. Chọn thẻ để bắt đầu.`;$('stageNote').innerHTML='Chỉ hiển thị các thẻ đã đánh dấu Chưa chính xác. <span class="mode-chip">VÒNG ÔN TẬP</span>';$('statusBox').textContent='Hãy thử lại các thẻ chưa chính xác để cải thiện KPI Độ chính xác.';updateProgress();tone('tap')}
+ reset=function(){reviewMode=false;celebrated=false;originalReset();updateProgress()}
+ $('drawBtn').onclick=animatedPick;$('deck').onclick=animatedPick;$('deck').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();animatedPick()}};$('revealBtn').onclick=reveal;$('knowBtn').onclick=()=>rateEnhanced('know',$('knowBtn'));$('reviewBtn').onclick=()=>rateEnhanced('review',$('reviewBtn'));$('nextBtn').onclick=()=>{clickFx($('nextBtn'));tone('tap');if(remaining()===0)showSummary();else doPick()};$('summaryBtn').onclick=()=>{clickFx($('summaryBtn'));tone('tap');showSummary()};$('shuffleBtn').onclick=()=>{clickFx($('shuffleBtn'));$('deck').classList.add('deck-shake');setTimeout(()=>$('deck').classList.remove('deck-shake'),500);newOrder();tone('tap');toast('Đã xáo thứ tự thẻ')};$('restartBtn').onclick=()=>{clickFx($('restartBtn'));reset()};$('reviewOnlyBtn').onclick=reviewOnly;
+ $('soundBtn').onclick=()=>{soundEnabled=!soundEnabled;$('soundBtn').setAttribute('aria-pressed',String(soundEnabled));$('soundBtn').classList.toggle('sound-on',soundEnabled);$('soundBtn').textContent=soundEnabled?'♪ Âm thanh: Bật':'♪ Âm thanh: Tắt';if(soundEnabled)tone('good');clickFx($('soundBtn'))};
+ updateProgress();
+})();
+</script>
+<script id="v5-card-js">
+(()=>{
+const I={
+1:'<path d="M3 12h3l3 2h4a1.5 1.5 0 0 1 0 3H9"/><path d="M13 16.5l5-2.5a1.6 1.6 0 0 1 1.6 2.7L13 21H3"/><circle cx="15" cy="6" r="3.5"/><path d="M15 4.5v3"/>',
+2:'<circle cx="9" cy="14" r="6"/><path d="M9 11v6M7.3 12.3h2.6a1.2 1.2 0 0 1 0 2.4H8.1a1.2 1.2 0 0 0 0 2.4h2.6"/><path d="M14 8l3-3 2 2 3-3"/><path d="M19 4h3v3"/>',
+3:'<path d="M12 3l8 3v5c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+4:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M15.5 14c3 0 5.5 1.8 5.5 5"/>',
+5:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7M10 17h4"/>',
+6:'<circle cx="12" cy="13" r="8"/><path d="M12 13V9M10 2h4M18.5 6.5l1.5-1.5"/><path d="M13 13.5l-2 2.5h2.5l-2 2.5"/>',
+7:'<circle cx="12" cy="9" r="6"/><path d="M8.5 13.8L7 22l5-3 5 3-1.5-8.2"/><path d="M10.5 9l1-1v3.5"/>',
+8:'<path d="M4 20h16"/><path d="M7 16v-3M11 16v-6M15 16v-4M19 16V7"/><path d="M4 10l5-4 4 3 7-6"/><path d="M16 3h4v4"/>'};
+const svg=id=>`<svg viewBox="0 0 24 24" aria-hidden="true">${I[id]||''}</svg>`;
+function fit(el,max){const box=el.parentElement;let fs=max;el.style.fontSize=fs+'px';while((el.scrollHeight>box.clientHeight||el.scrollWidth>box.clientWidth)&&fs>12){fs-=1;el.style.fontSize=fs+'px'}}
+function fitAll(){if(!current)return;const w=shell.clientWidth||320;
+ const f=$('frontValue');f.style.whiteSpace=current.front.length<=8?'nowrap':'normal';fit(f,Math.min(68,Math.round(w*.19)));
+ // measure back while hidden (backface) – still laid out
+ fit($('backValue'),Math.min(34,Math.round(w*.095)));}
+function onCard(){if(!current)return;shell.classList.remove('flipping');
+ $('frontIcon').innerHTML=svg(current.id);$('backIcon').innerHTML=svg(current.id);
+ requestAnimationFrame(fitAll);}
+new MutationObserver(onCard).observe($('backValue'),{childList:true,characterData:true,subtree:true});
+new MutationObserver(()=>{if(shell.classList.contains('active'))requestAnimationFrame(fitAll)}).observe(shell,{attributes:true,attributeFilter:['class']});
+const baseReveal=reveal;
+reveal=function(){if(!current||shell.classList.contains('flipped'))return;baseReveal();
+ shell.classList.remove('flipping');void shell.offsetWidth;shell.classList.add('flipping');
+ setTimeout(()=>shell.classList.remove('flipping'),800);};
+$('revealBtn').onclick=reveal;
+// fly-out then fly-in on next card
+const oldNext=$('nextBtn').onclick;
+$('nextBtn').onclick=function(e){
+ if(remaining()===0){oldNext.call(this,e);return}
+ const b=$('nextBtn');b.disabled=true;
+ shell.classList.remove('card-enter');void shell.offsetWidth;shell.classList.add('card-exit');
+ setTimeout(()=>{shell.classList.remove('card-exit','flipped');oldNext.call(b,e);b.disabled=false},440);};
+// front tap also flips
+shell.addEventListener('click',()=>{if($('revealBtn').style.display!=='none')reveal()});
+let t;window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fitAll,120)});
+})();
+</script>
+</body>
+</html>
